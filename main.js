@@ -3,8 +3,26 @@ const searchInput = document.querySelector('input');
 const btn = document.querySelector('button');
 const cardSection = document.querySelector('.card-section');
 
-// const Api_Key = config.apikey;
 const ReadToken = config.readToken;
+
+document.addEventListener('DOMContentLoaded', () => {
+  const url = `https://api.themoviedb.org/3/movie/popular?language=ko-KO&page=1`;
+  const options = {
+    method: 'GET',
+    headers: {
+      accept: 'application/json',
+      Authorization: `Bearer ${ReadToken}`,
+    },
+  };
+
+  fetch(url, options)
+    .then((res) => res.json())
+    .then((json) => {
+      let movieData = json.results;
+      makeCard(movieData);
+    })
+    .catch((err) => console.error('error:' + err));
+});
 
 form.addEventListener('submit', (e) => {
   e.preventDefault();
@@ -18,7 +36,7 @@ form.addEventListener('submit', (e) => {
     },
   };
 
-  fetch('dummy.json', options)
+  fetch(url, options)
     .then((res) => res.json())
     .then((json) => {
       let movieData = json.results;
