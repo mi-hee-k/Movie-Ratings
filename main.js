@@ -5,46 +5,40 @@ const cardSection = document.querySelector('.card-section');
 
 const ReadToken = config.readToken;
 
-document.addEventListener('DOMContentLoaded', () => {
-  const url = `https://api.themoviedb.org/3/movie/popular?language=ko-KO&page=1`;
-  const options = {
-    method: 'GET',
-    headers: {
-      accept: 'application/json',
-      Authorization: `Bearer ${ReadToken}`,
-    },
-  };
+const options = {
+  method: 'GET',
+  headers: {
+    accept: 'application/json',
+    Authorization: `Bearer ${ReadToken}`,
+  },
+};
 
-  fetch(url, options)
+// fetch
+const fetchData = async (url) => {
+  return await fetch(url, options)
     .then((res) => res.json())
     .then((json) => {
       let movieData = json.results;
       makeCard(movieData);
     })
     .catch((err) => console.error('error:' + err));
+};
+
+// popular
+document.addEventListener('DOMContentLoaded', () => {
+  fetchData('https://api.themoviedb.org/3/movie/popular?language=ko-KO&page=1');
 });
 
+// search
 form.addEventListener('submit', (e) => {
   e.preventDefault();
   const searchValue = searchInput.value;
-  const url = `https://api.themoviedb.org/3/search/movie?query=${searchValue}&include_adult=false&language=en-US&page=1`;
-  const options = {
-    method: 'GET',
-    headers: {
-      accept: 'application/json',
-      Authorization: `Bearer ${ReadToken}`,
-    },
-  };
-
-  fetch(url, options)
-    .then((res) => res.json())
-    .then((json) => {
-      let movieData = json.results;
-      makeCard(movieData);
-    })
-    .catch((err) => console.error('error:' + err));
+  fetchData(
+    `https://api.themoviedb.org/3/search/movie?query=${searchValue}&include_adult=false&language=en-US&page=1`
+  );
 });
 
+// 카드추가
 const makeCard = (movieData) => {
   cardSection.innerHTML = movieData
     .map((item) => {
