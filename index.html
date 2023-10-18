@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" href="reset.css" />
     <link rel="stylesheet" href="style.css" />
+    <script src="./api.js"></script>
+    <script defer src="./main.js"></script>
     <title>최고 평점 영화</title>
   </head>
   <body>
@@ -13,20 +15,20 @@
     </header>
     <main>
       <form>
-        <input type="text" />
+        <input type="text" placeholder="찾고 싶은 영화를 입력하세요" />
         <button>🔍 검색</button>
       </form>
       <div class="card-section">
-        <div class="card">
-          <div>
+        <!-- <div class="card">
+          <div class="img-box">
             <img
               src="https://image.tmdb.org/t/p/w500/lyQBXzOQSuE59IsHyhrp0qIiPAz.jpg"
               alt=""
             />
           </div>
-          <div>
-            <h2>The Shawshank Redemption</h2>
-            <p>
+          <div class="movie-card">
+            <h2 class="title">The Shawshank Redemption</h2>
+            <p class="desc">
               Framed in the 1940s for the double murder of his wife and her
               lover, upstanding banker Andy Dufresne begins a new life at the
               Shawshank prison, where he puts his accounting skills to work for
@@ -35,9 +37,9 @@
               prisoner named Red -- for his integrity and unquenchable sense of
               hope.
             </p>
-            <span>⭐⭐⭐⭐</span>
+            <span class="rating">평점 ⭐⭐⭐⭐</span>
           </div>
-        </div>
+        </div> -->
       </div>
     </main>
   </body>
