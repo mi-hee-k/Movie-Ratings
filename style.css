@@ -138,12 +138,20 @@ button {
 .card {
   display: flex;
   flex-direction: column;
+  position: relative;
   background-color: #fff;
   width: 18%;
-  max-height: 800px;
+  max-height: 750px;
   border-radius: 10px;
   padding: 20px;
   margin-bottom: 30px;
+  cursor: pointer;
+  filter: drop-shadow(4px 3px 4px #8a8a8a);
+  transition: transform 0.3s ease-in-out;
+}
+
+.card:hover {
+  transform: scale(1.01);
 }
 
 .img-box {
@@ -160,10 +168,15 @@ button {
 }
 
 .desc {
-  margin-bottom: 10px;
+  margin-bottom: 52px;
 }
 
-.rating {
+/* ----- movie-card-footer */
+
+.movie-card-footer {
+  align-items: center;
+  position: absolute;
+  bottom: 20px;
   font-weight: bold;
 }
 
@@ -176,7 +189,7 @@ button {
 }
 @media (max-width: 768px) {
   .card {
-    width: 50%;
+    width: 45%;
   }
 }
 @media (max-width: 480px) {
