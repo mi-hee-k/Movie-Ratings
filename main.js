@@ -1,10 +1,7 @@
 const form = document.querySelector('form');
 const searchInput = document.querySelector('input');
-const btn = document.querySelector('button');
 const cardSection = document.querySelector('.card-section');
-const card = document.querySelector('.card');
 const home = document.querySelector('h1');
-
 const ReadToken = config.readToken;
 
 const options = {
@@ -45,42 +42,43 @@ const fetchData = async (url) => {
       let movieData = json.results;
       makeCard(movieData);
     })
-    .catch((err) => console.error('error:' + err));
+    .then(() => {
+      searchMovie();
+    })
+    .catch((err) => console.error(err));
 };
 
-// popular
+// Top Rated
 document.addEventListener('DOMContentLoaded', () => {
-  fetchData('https://api.themoviedb.org/3/movie/popular?language=ko-KO&page=1');
-  // fetchData('popular.json');
+  fetchData('dummy.json');
   searchInput.focus();
 });
 
-// search
-form.addEventListener('submit', (e) => {
-  e.preventDefault();
-  const searchValue = searchInput.value.toLowerCase();
-  if (searchValue.length === 0) {
-    searchInput.focus();
-    return;
+// 검색
+function searchMovie() {
+  const cards = cardSection.querySelectorAll('.card');
+
+  function handleSearch(e) {
+    e.preventDefault();
+    let searchValue = searchInput.value;
+
+    cards.forEach((element) => {
+      element.classList.remove('hidden');
+      let movieTitle = element.childNodes[3].childNodes[1].innerText;
+      if (!movieTitle.toLowerCase().includes(searchValue)) {
+        element.classList.add('hidden');
+      }
+    });
   }
-  fetchData(
-    `https://api.themoviedb.org/3/search/movie?query=${searchValue}&page=1`
-  );
-  // fetchData('dummy.json');
-});
+  form.addEventListener('click', handleSearch);
+}
 
 // 카드추가
 const makeCard = (movieData) => {
+  console.log(movieData);
   cardSection.innerHTML = movieData
     .map((item) => {
-      // fetch(`https://api.themoviedb.org/3/movie/${item.id}/keywords`, options)
-      //   .then((res) => res.json())
-      //   .then((json) => {
-      //     let keywords = json.keywords;
-      //     item = { ...item, keywords };
-      //   })
-      //   .catch((err) => console.error('error:' + err));
-      return `<div class="card" onclick="alert(${item.id})">
+      return `<div class="card" id="${item.id}" onclick="alert(${item.id})">
           <div class="img-box">
               <img
                 src=https://image.tmdb.org/t/p/w500${item.poster_path}
@@ -93,8 +91,7 @@ const makeCard = (movieData) => {
               item.original_title.length > 50
                 ? item.original_title.substr(0, 50) + '...'
                 : item.original_title
-            } ${item.genre_ids.includes(18) ? '🔞' : ''}</h2>
-            <span><span>
+            }</h2>
             <p class="desc">
               ${
                 item.overview.length > 100

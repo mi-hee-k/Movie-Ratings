@@ -1,3 +1,7 @@
+body {
+  background-color: #eeeeee;
+}
+
 /* header */
 
 header {
@@ -12,9 +16,7 @@ header {
 /* main */
 
 main {
-  height: 100%;
   padding: 20px;
-  background-color: #eee;
 }
 
 /* ----- form */
@@ -51,23 +53,16 @@ button:hover {
 
 /* ----- card */
 
+.card.hidden {
+  display: none;
+}
+
 .card-section {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: stretch;
   width: 100%;
-}
-
-.card {
-  display: flex;
-  flex-direction: column;
-  background-color: #fff;
-  width: 30%;
-  max-height: 800px;
-  border-radius: 10px;
-  padding: 20px;
-  margin-bottom: 30px;
 }
 
 .img-box {
