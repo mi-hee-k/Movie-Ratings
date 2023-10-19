@@ -26,16 +26,18 @@ const fetchData = async (url) => {
 
 // popular
 document.addEventListener('DOMContentLoaded', () => {
-  fetchData('https://api.themoviedb.org/3/movie/popular?language=ko-KO&page=1');
+  // fetchData('https://api.themoviedb.org/3/movie/popular?language=ko-KO&page=1');
+  fetchData('popular.json');
 });
 
 // search
 form.addEventListener('submit', (e) => {
   e.preventDefault();
   const searchValue = searchInput.value;
-  fetchData(
-    `https://api.themoviedb.org/3/search/movie?query=${searchValue}&include_adult=false&language=en-US&page=1`
-  );
+  // fetchData(
+  //   `https://api.themoviedb.org/3/search/movie?query=${searchValue}&include_adult=false&language=en-US&page=1`
+  // );
+  fetchData('dummy.json');
 });
 
 // 카드추가
@@ -45,8 +47,8 @@ const makeCard = (movieData) => {
       return `<div class="card">
           <div class="img-box">
             <img
-              src="https://image.tmdb.org/t/p/w500/lyQBXzOQSuE59IsHyhrp0qIiPAz.jpg"
-              alt=""
+              src=https://image.tmdb.org/t/p/w500${item.poster_path}
+              alt=${item.original_title}
             />
           </div>
           <div class="movie-card">
