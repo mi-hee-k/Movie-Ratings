@@ -3,6 +3,7 @@ const searchInput = document.querySelector('input');
 const btn = document.querySelector('button');
 const cardSection = document.querySelector('.card-section');
 const card = document.querySelector('.card');
+const home = document.querySelector('h1');
 
 const ReadToken = config.readToken;
 
@@ -13,6 +14,10 @@ const options = {
     Authorization: `Bearer ${ReadToken}`,
   },
 };
+
+home.addEventListener('click', () => {
+  location.reload();
+});
 
 // 평점 -> ⭐
 const starAverage = (average) => {
@@ -27,7 +32,7 @@ const starAverage = (average) => {
   } else if (average > 2) {
     average = '⭐';
   } else if (average > 0) {
-    average = '1';
+    average = '☆';
   }
   return average;
 };
@@ -54,8 +59,12 @@ document.addEventListener('DOMContentLoaded', () => {
 form.addEventListener('submit', (e) => {
   e.preventDefault();
   const searchValue = searchInput.value.toLowerCase();
+  if (searchValue.length === 0) {
+    searchInput.focus();
+    return;
+  }
   fetchData(
-    `https://api.themoviedb.org/3/search/movie?query=${searchValue}&include_adult=false&language=en-US&page=1`
+    `https://api.themoviedb.org/3/search/movie?query=${searchValue}&page=1`
   );
   // fetchData('dummy.json');
 });
@@ -64,15 +73,13 @@ form.addEventListener('submit', (e) => {
 const makeCard = (movieData) => {
   cardSection.innerHTML = movieData
     .map((item) => {
-      fetch(`https://api.themoviedb.org/3/movie/${item.id}/keywords`, options)
-        .then((res) => res.json())
-        .then((json) => {
-          let keywordData = json.keywords;
-          let keywords = keywordData.map((keyword) => keyword.name);
-          item = { ...item, keywords };
-          console.log(item);
-        })
-        .catch((err) => console.error('error:' + err));
+      // fetch(`https://api.themoviedb.org/3/movie/${item.id}/keywords`, options)
+      //   .then((res) => res.json())
+      //   .then((json) => {
+      //     let keywords = json.keywords;
+      //     item = { ...item, keywords };
+      //   })
+      //   .catch((err) => console.error('error:' + err));
       return `<div class="card" onclick="alert(${item.id})">
           <div class="img-box">
               <img
@@ -83,11 +90,11 @@ const makeCard = (movieData) => {
           </div>
           <div class="movie-card">
             <h2 class="title">${
-              item.original_title.length > 60
-                ? item.original_title.substr(0, 60) + '...'
+              item.original_title.length > 50
+                ? item.original_title.substr(0, 50) + '...'
                 : item.original_title
-            }</h2>
-            <span>${item.keywords[0]}</span>
+            } ${item.genre_ids.includes(18) ? '🔞' : ''}</h2>
+            <span><span>
             <p class="desc">
               ${
                 item.overview.length > 100

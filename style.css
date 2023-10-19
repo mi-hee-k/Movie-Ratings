@@ -1,11 +1,12 @@
 /* header */
 
 header {
-  background-color: blue;
+  background-color: #292929;
   color: #fff;
-  height: 80px;
   text-align: center;
-  line-height: 80px;
+  height: 100px;
+  line-height: 100px;
+  cursor: pointer;
 }
 
 /* main */
@@ -39,6 +40,13 @@ button {
   height: 40px;
   padding: 10px;
   border-radius: 5px;
+  cursor: pointer;
+  transition: transform 0.3 ease-in-out;
+}
+
+button:hover {
+  filter: brightness(0.8);
+  transform: scale(1.03);
 }
 
 /* ----- card */
@@ -81,58 +89,6 @@ button {
 
 .rating {
   font-weight: bold;
-}
-/* header */
-
-header {
-  background-color: blue;
-  color: #fff;
-  height: 80px;
-  text-align: center;
-  line-height: 80px;
-}
-
-/* main */
-
-main {
-  height: 100%;
-  padding: 20px;
-  background-color: #eee;
-}
-
-/* ----- form */
-
-form {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  height: 120px;
-}
-
-input {
-  padding: 10px 10px;
-  width: 30%;
-  height: 40px;
-  border-radius: 5px;
-  margin-right: 5px;
-}
-
-button {
-  background-color: #c2c2c2;
-  height: 40px;
-  padding: 10px;
-  border-radius: 5px;
-}
-
-/* ----- card */
-
-.card-section {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  align-items: stretch;
-  width: 100%;
 }
 
 .card {
@@ -190,6 +146,9 @@ button {
 @media (max-width: 768px) {
   .card {
     width: 45%;
+  }
+  input {
+    width: 70%;
   }
 }
 @media (max-width: 480px) {
