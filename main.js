@@ -75,7 +75,8 @@ searchForm.addEventListener('submit', (e) => {
   // fetchData(
   //   `https://api.themoviedb.org/3/search/movie?query=${searchValue}&language=ko-KR&page=1`
   // );
-  fetchData('search.json');
+  // fetchData('search.json');
+  fetchData('search2.json');
   searchInput.value = '';
 });
 
@@ -86,20 +87,24 @@ function searchMovie() {
   function handleSearch(e) {
     e.preventDefault();
     let withinSearchValue = withinInput.value;
-
     cards.forEach((element) => {
-      element.classList.remove('hidden');
+      element.classList.add('hidden');
       let movieTitle = element.childNodes[3].childNodes[1].innerText;
-      if (!movieTitle.toLowerCase().includes(withinSearchValue)) {
-        element.classList.add('hidden');
+      if (movieTitle.toLowerCase().includes(withinSearchValue)) {
+        element.classList.remove('hidden');
       }
     });
   }
-  form.addEventListener('click', handleSearch);
+  form.addEventListener('submit', handleSearch);
 }
 
 // 카드추가
 const makeCard = (movieData) => {
+  if (movieData.length === 0) {
+    alert('검색결과가 없습니다. 영화 이름을 확인해주세요');
+    searchInput.focus();
+    return;
+  }
   cardSection.innerHTML = movieData
     .map((item) => {
       return `<div class="card" id="${item.id}" onclick="alert(${item.id})">
