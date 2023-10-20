@@ -75,7 +75,6 @@ function searchMovie() {
 
 // 카드추가
 const makeCard = (movieData) => {
-  console.log(movieData);
   cardSection.innerHTML = movieData
     .map((item) => {
       return `<div class="card" id="${item.id}" onclick="alert(${item.id})">
