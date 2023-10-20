@@ -106,15 +106,15 @@ const makeCard = (movieData) => {
           <div class="img-box">
               <img
                 src=https://image.tmdb.org/t/p/w500${item.poster_path}
-                alt=${item.original_title}
+                alt=${item.title}
                 onerror="this.style.display='none'"
               />
           </div>
           <div class="movie-card">
             <h2 class="title">${
-              item.original_title.length > 50
-                ? item.original_title.substr(0, 50) + '...'
-                : item.original_title
+              item.title.length > 50
+                ? item.title.substr(0, 50) + '...'
+                : item.title
             }</h2>
             <p class="desc">
               ${
