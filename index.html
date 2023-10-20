@@ -12,13 +12,40 @@
   <body>
     <header>
       <h1>🎬 최고 평점 영화</h1>
+      <nav>
+        <ul class="menu">
+          <li class="popular-btn">현재 인기 영화 확인하기</li>
+        </ul>
+      </nav>
     </header>
     <main>
-      <form>
-        <input type="text" placeholder="찾고 싶은 영화를 입력하세요" />
-        <button>🔍 검색</button>
-      </form>
+      <div class="form-section">
+        <form class="within-result-form">
+          <label for="within-input"
+            ><span class="bold">결과 내</span> 검색</label
+          >
+          <input
+            id="within-input"
+            class="within-input"
+            type="text"
+            placeholder="찾고 싶은 영화를 입력하세요"
+          />
+          <button class="within-btn">🔍 검색</button>
+        </form>
+        <form class="search-form">
+          <label for="within-input"
+            ><span class="bold">모든 영화</span> 검색</label
+          >
+          <input
+            class="search-input"
+            type="text"
+            placeholder="찾고 싶은 영화를 입력하세요"
+          />
+          <button class="search-btn">🔍 검색</button>
+        </form>
+      </div>
       <div class="card-section"></div>
     </main>
+    <button class="top-btn">TOP</button>
   </body>
 </html>

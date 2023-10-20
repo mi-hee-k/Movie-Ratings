@@ -1,7 +1,12 @@
-const form = document.querySelector('form');
-const searchInput = document.querySelector('input');
+const form = document.querySelector('.within-result-form');
+const searchForm = document.querySelector('.search-form');
+const searchInput = document.querySelector('.search-input');
+const withinInput = document.querySelector('.within-input');
 const cardSection = document.querySelector('.card-section');
 const home = document.querySelector('h1');
+const popularBtn = document.querySelector('.popular-btn');
+const topBtn = document.querySelector('.top-btn');
+
 const ReadToken = config.readToken;
 
 const options = {
@@ -50,22 +55,42 @@ const fetchData = async (url) => {
 
 // Top Rated
 document.addEventListener('DOMContentLoaded', () => {
-  fetchData('dummy.json');
-  searchInput.focus();
+  fetchData('top_rated.json');
+  withinInput.focus();
 });
 
-// 검색
+popularBtn.addEventListener('click', () => {
+  // fetchData('https://api.themoviedb.org/3/movie/popular?language=ko-KR&page=1');
+  fetchData('popular.json');
+});
+
+// popular
+searchForm.addEventListener('submit', (e) => {
+  e.preventDefault();
+  const searchValue = searchInput.value.toLowerCase();
+  if (searchValue.length === 0) {
+    searchInput.focus();
+    return;
+  }
+  // fetchData(
+  //   `https://api.themoviedb.org/3/search/movie?query=${searchValue}&language=ko-KR&page=1`
+  // );
+  fetchData('search.json');
+  searchInput.value = '';
+});
+
+// 결과 내 검색
 function searchMovie() {
   const cards = cardSection.querySelectorAll('.card');
 
   function handleSearch(e) {
     e.preventDefault();
-    let searchValue = searchInput.value;
+    let withinSearchValue = withinInput.value;
 
     cards.forEach((element) => {
       element.classList.remove('hidden');
       let movieTitle = element.childNodes[3].childNodes[1].innerText;
-      if (!movieTitle.toLowerCase().includes(searchValue)) {
+      if (!movieTitle.toLowerCase().includes(withinSearchValue)) {
         element.classList.add('hidden');
       }
     });
@@ -108,3 +133,23 @@ const makeCard = (movieData) => {
     })
     .join('');
 };
+
+// top button
+const showTopBtn = () => {
+  window.scrollY > 200
+    ? topBtn.classList.add('show')
+    : topBtn.classList.remove('show');
+};
+
+window.addEventListener('scroll', showTopBtn);
+
+const scrollWindow = function () {
+  if (window.scrollY != 0) {
+    setTimeout(function () {
+      window.scrollTo(0, window.scrollY - 50);
+      scrollWindow();
+    }, 10);
+  }
+};
+
+topBtn.addEventListener('click', scrollWindow);
