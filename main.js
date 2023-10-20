@@ -143,7 +143,7 @@ const showTopBtn = () => {
 
 window.addEventListener('scroll', showTopBtn);
 
-const scrollWindow = function () {
+const scrollWindow = () => {
   if (window.scrollY != 0) {
     setTimeout(function () {
       window.scrollTo(0, window.scrollY - 50);
